@@ -1,17 +1,18 @@
-package objects;
+package lab;
 
 
 import java.util.ArrayList;
+import java.util.List;
 
 public interface LibraryInterface {
 
-    boolean addBook(Book book_new);
+    boolean addBook(Book bookNew);
 
-    public boolean addOneMoreBook(ArrayList<Book> bookList_new);
+    public void addOneMoreBook(List<Book> bookListNew);
 
     boolean deleteBook(int index);
 
-    boolean isEqualBooks(Book book_new);
+    boolean isEqualBooks(Book bookNew);
 
     ArrayList<Book> getBookList();
 

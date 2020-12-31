@@ -1,4 +1,4 @@
-package objects;
+package lab;
 
 import org.junit.Test;
 
@@ -8,15 +8,15 @@ import static org.mockito.Mockito.spy;
 
 public class BookIntegrationTest {
 
-    Author author1 = new Author("Test", "Test", "1985/6/23");
-    Book testBook = new Book(author1, "Test", 2012, "Test", 9.99, BookGenreEnum.BUSINESS);
-    Book spyBook = spy(testBook);
+    final Author author1 = new Author("Test", "Test", "1985/6/23");
+    final Book testBook = new Book(author1, "Test", 2012, "Test", 9.99, BookGenreEnum.BUSINESS);
+    final Book spyBook = spy(testBook);
 
 
     @Test
     public void getterShouldReturnCorrectAuthor() {
         assertEquals(author1,spyBook.getAuthor());
-        assertTrue(spyBook.getAuthor().equals(author1));
+        assertEquals(author1, spyBook.getAuthor());
     }
 
     @Test
