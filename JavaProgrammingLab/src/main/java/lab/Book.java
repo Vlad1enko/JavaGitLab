@@ -1,15 +1,15 @@
-package objects;
+package lab;
 
 public class Book {
 
     private static int serialNumberGenerator = 0;
-    private int serialNumber;
+    private final int serialNumber;
     private final Author author;
     private final String title;
     private final int year;
-    private String publisher;
-    private double cost;
-    private BookGenreEnum genre;
+    private final String publisher;
+    private final double cost;
+    private final BookGenreEnum genre;
 
     public Book() {
         this.serialNumber = serialNumberGenerator++;
@@ -22,14 +22,14 @@ public class Book {
         this.genre = BookGenreEnum.CLASSICS;
     }
 
-    public Book( Author author_new, String title_new, int year_new, String publisher_new, double cost_new, BookGenreEnum genre) {
+    public Book( Author authorNew, String titleNew, int yearNew, String publisherNew, double costNew, BookGenreEnum genre) {
         this.serialNumber = serialNumberGenerator++;
-        this.author = author_new;
+        this.author = authorNew;
         this.author.incrementNumOfBooks();  //located in this library
-        this.title = title_new;
-        this.year = year_new;
-        this.publisher = publisher_new;
-        this.cost = cost_new;
+        this.title = titleNew;
+        this.year = yearNew;
+        this.publisher = publisherNew;
+        this.cost = costNew;
         this.genre = genre;
     }
 
@@ -62,7 +62,7 @@ public class Book {
     }
 
     @Override
-    public String toString() { // TODO change to toString
+    public String toString() {
         StringBuilder strBuffer = new StringBuilder(genre.toString()); //smart memory allocation
         strBuffer.append(" book: \"");
         strBuffer.append(this.title);
@@ -76,16 +76,4 @@ public class Book {
         return strBuffer.toString();
     }
 
-//    @Override
-//    public boolean equals(Object obj) {
-//        if (obj == this) {
-//            return true;
-//        }
-//        if (obj == null || obj.getClass() != this.getClass()) {
-//            return false;
-//        }
-//
-//        Book guest = (Book) obj;
-//        return serialNumber == guest.serialNumber;
-//    }
 }

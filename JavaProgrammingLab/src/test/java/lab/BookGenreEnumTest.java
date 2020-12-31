@@ -1,4 +1,4 @@
-package objects;
+package lab;
 
 import org.junit.Test;
 
@@ -9,7 +9,7 @@ import static org.junit.Assert.assertFalse;
 
 public class BookGenreEnumTest {
 
-    BookGenreEnum testEnum = BookGenreEnum.BUSINESS;
+    final BookGenreEnum testEnum = BookGenreEnum.BUSINESS;
 
     @Test(expected = IllegalArgumentException.class)
     public void testIllegalArgument() { BookGenreEnum.valueOf("History").toString(); }

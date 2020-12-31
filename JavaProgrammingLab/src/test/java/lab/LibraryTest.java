@@ -1,18 +1,18 @@
-package objects;
+package lab;
 
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class LibraryTest {
 
-    Library library = new Library("Test Library");
-    Author author1 = new Author("Test", "Test", "1985/6/23");
-    ArrayList<Book> bookList = new ArrayList<>();
-    Book book1 = new Book(author1, "Test", 2012, "Test", 9.99, BookGenreEnum.BUSINESS);
+    final Library library = new Library("Test Library");
+    final Author author1 = new Author("Test", "Test", "1985/6/23");
+    final ArrayList<Book> bookList = new ArrayList<>();
+    final Book book1 = new Book(author1, "Test", 2012, "Test", 9.99, BookGenreEnum.BUSINESS);
 
 
     @Test
@@ -85,7 +85,7 @@ public class LibraryTest {
         assertFalse(library.deleteBook(0));
     }
 
-    @Test(expected = Library.BooksEqualException.class)
+    @Test
     public void testIsEqualBooks() {
         //GIVEN
         library.addBook(book1);
@@ -96,6 +96,18 @@ public class LibraryTest {
         //THEN
         assertEquals(1, library.getCapacity());
         assertEquals(book1, library.getBookList().get(0));
+    }
+
+    @Test(expected = Library.BooksEqualException.class)
+    public void testIsEqualBooksException() {
+        //GIVEN
+        library.addBook(book1);
+
+        //WHEN
+        library.addBook(book1);
+
+
+        //THEN
     }
 
     @Test
@@ -134,4 +146,71 @@ public class LibraryTest {
         //THEN
         assertEquals(res, library.toString());
     }
+
+//    @Test
+//    public void testFindBookInLibrary() {
+//        //GIVEN
+//        bookList.add(book1);
+//
+//        //WHEN
+//        Library lib = new Library("libraryConstructorTest", bookList);
+//
+//        //THEN
+//        assertEquals(book1, lib.findBookInLibrary(book1.getTitle()));
+//    }
+    @Test
+    public void testCalculateTotalCost() {
+        //GIVEN
+        bookList.add(book1);
+        bookList.add(new Book(author1, "The Miracle", 1968, "London Press", 10.00, BookGenreEnum.FANTASY));
+
+        //WHEN
+        Library lib = new Library("libraryConstructorTest", bookList);
+
+        //THEN
+        assertEquals(19.99,Math.floor(lib.calculateTotalCost()*100)/100 );
+    }
+    @Test
+    public void testFindTheMostExpensiveBook() {
+        //GIVEN
+        bookList.add(book1);
+        bookList.add(new Book(author1, "The Miracle", 1968, "London Press", 5.00, BookGenreEnum.FANTASY));
+
+        //WHEN
+        Library lib = new Library("libraryConstructorTest", bookList);
+        Optional<Book> res = Optional.of(book1);
+
+        //THEN
+        assertTrue(lib.findTheMostExpensiveBook().isPresent());
+        assertEquals(res, lib.findTheMostExpensiveBook());
+    }
+
+    @Test
+    public void testCalculateAverageCostOfBooks() {
+        //GIVEN
+        bookList.add(book1);
+        bookList.add(new Book(author1, "The Miracle", 1968, "London Press", 5.00, BookGenreEnum.FANTASY));
+
+        //WHEN
+        Library lib = new Library("libraryConstructorTest", bookList);
+
+        //THEN
+        assertEquals((9.99+5.00)/2, lib.calculateAverageCostOfBooks() );
+    }
+
+//    @Test
+//    public void testSearchBookByGenre() {
+//        //GIVEN
+//        bookList.add(book1);
+//        bookList.add(new Book(author1, "The Miracle", 1968, "London Press", 5.00, BookGenreEnum.FANTASY));
+//
+//        //WHEN
+//        Library lib = new Library("libraryConstructorTest", bookList);
+//        List<Book> resTrue = new ArrayList<>();
+//
+//
+//        //THEN
+//        assertEquals( new Book(author1, "The Miracle", 1968, "London Press", 5.00, BookGenreEnum.FANTASY), lib.searchBookByGenre(BookGenreEnum.FANTASY).get(true).get(0) );
+//        assertEquals( book1, lib.searchBookByGenre(BookGenreEnum.FANTASY).get(true).get(0) );
+//    }
 }

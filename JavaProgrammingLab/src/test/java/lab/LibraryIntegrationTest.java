@@ -1,4 +1,4 @@
-package objects;
+package lab;
 
 import org.junit.Test;
 
@@ -10,10 +10,10 @@ import static org.mockito.Mockito.*;
 public class LibraryIntegrationTest {
 
     //Library mockLibrary = mock(Library.class);
-    Library library = new Library("Test Library");
-    Library spyLibrary = spy(library);
-    Author author1 = new Author("Test", "Test", "1985/6/23");
-    ArrayList<Book> bookList = new ArrayList<>();
+    final Library library = new Library("Test Library");
+    final Library spyLibrary = spy(library);
+    final Author author1 = new Author("Test", "Test", "1985/6/23");
+    final ArrayList<Book> bookList = new ArrayList<>();
 
     @Test
     public void shouldAddOneBookToLibrary() {
@@ -66,14 +66,15 @@ public class LibraryIntegrationTest {
         //GIVEN
         Book book1 = new Book(author1, "Test", 2012, "Test", 9.99, BookGenreEnum.BUSINESS);
         Book book2 = new Book(author1, "Test", 2012, "Test", 9.99, BookGenreEnum.BUSINESS);
+        bookList.add(book1);
+        bookList.add(book1);  //repeat
 
         //WHEN
         try {
-            bookList.add(book1);
-            bookList.add(book1);  //repeat
             spyLibrary.addOneMoreBook(bookList);
             fail("Expected BooksEqualException for addBook method");
         } catch (Library.BooksEqualException e) {
+            e.printStackTrace();
         }
 
         //THEN

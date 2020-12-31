@@ -1,4 +1,4 @@
-package objects;
+package lab;
 
 import org.junit.Test;
 
@@ -7,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BookTest {
 
-    Book book1 = new Book();
+    final Book book1 = new Book();
 
     @Test
     public void testGetters() {

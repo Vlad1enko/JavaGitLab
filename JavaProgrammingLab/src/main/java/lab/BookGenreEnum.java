@@ -1,4 +1,4 @@
-package objects;
+package lab;
 
 public enum BookGenreEnum {
     ADVENTURE(true),
@@ -8,14 +8,14 @@ public enum BookGenreEnum {
     SCI_FI(true),
     BUSINESS(false);
 
-    private Boolean isFiction;
+    private final Boolean isFiction;
 
     BookGenreEnum(Boolean isFiction) {
         this.isFiction = isFiction;
     }
 
     @Override
-    public String toString() { //TODO make more logical;
+    public String toString() {
         return switch (this) {
             case ADVENTURE -> "Adventure";
             case CLASSICS -> "Classics";

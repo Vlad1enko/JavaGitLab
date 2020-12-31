@@ -1,16 +1,22 @@
-package objects;
+package lab;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public abstract class Person {
-    protected String name;
+    protected final String name;
     protected String surname;
+    private Character sex;
     protected LocalDate dob;
 
     Person() {
         this.name = "SampleName";
         this.surname = "SampleSurname";
+    }
+
+    Person(String name, char sex) {
+        this.name = name;
+        this.sex = sex;
     }
 
     Person(String name, String surname) {
@@ -29,7 +35,7 @@ public abstract class Person {
 
     public String getName() {
         return this.name;
-    };
+    }
 
     public String getSurname() {
         return this.surname;
@@ -37,6 +43,10 @@ public abstract class Person {
 
     public LocalDate getDob() {
         return this.dob;
+    }
+
+    public Character getSex() {
+        return sex;
     }
 
     public String getDobString() {

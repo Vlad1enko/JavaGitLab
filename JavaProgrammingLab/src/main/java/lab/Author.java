@@ -1,9 +1,10 @@
-package objects;
+package lab;
 
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Author extends Person {
-    protected AtomicInteger numOfBooks = new AtomicInteger(0);
+    protected final AtomicInteger numOfBooks = new AtomicInteger(0);
 
     public Author() {
         super();
@@ -38,6 +39,11 @@ public class Author extends Person {
 
         Author guest = (Author) obj;
         return name.equals(guest.name) && surname.equals(guest.surname) && dob.isEqual(guest.getDob());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, surname);
     }
 
     public int getNumberOfBooks() { return this.numOfBooks.get(); }
